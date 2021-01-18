@@ -1,9 +1,5 @@
-package com.test.fairlyused.ui.userlist.fragment
+package com.test.fairlyused.ui.userfulldetails.fragment
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 
 class UserFullDetailsFragment :  UserListAdapter.OnItemClickListener {
 

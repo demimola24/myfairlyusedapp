@@ -17,12 +17,12 @@ interface FetchUserDetailService {
 }
 
 interface FetchUserDetailDataSource {
-    suspend fun fetchUserDetail() : UserDetail
+    suspend fun fetchUserDetail(userId: String) : UserDetail
 }
 
 @AppScope
 class FetchUserDetailRepository @Inject constructor(private val apiService: FetchUserDetailService) : FetchUserDetailDataSource {
-    override suspend fun fetchUserDetail(): UserDetail {
-        return apiService.fetchUserDetail()
+    override suspend fun fetchUserDetail(userId: String): UserDetail {
+        return apiService.fetchUserDetail(userId)
     }
 }

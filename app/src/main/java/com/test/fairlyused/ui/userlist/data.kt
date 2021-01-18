@@ -10,7 +10,7 @@ import javax.inject.Inject
  */
 
 interface FetchUsersService {
-    @GET("user")
+    @GET("user?limit=100")
     suspend fun fetchUsers(): List<UserSummary>
 
 }

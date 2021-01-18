@@ -2,6 +2,8 @@ package com.test.fairlyused.di.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.test.fairlyused.ui.userfulldetails.viewmodel.UserFullDetailsViewModel
+import com.test.fairlyused.ui.userlist.viewmodel.UserListViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -11,19 +13,19 @@ import dagger.multibindings.IntoMap
 abstract class ViewModelModule {
 
 
-//    @Binds
-//    @IntoMap
-//    @ViewModelKey(SavingGoalDurationViewModel::class)
-//    abstract fun bindSavingGoalDurationViewModel(viewModel: SavingGoalDurationViewModel): ViewModel
-//
-//    @Binds
-//    @IntoMap
-//    @ViewModelKey(FundSavingsAmountViewModel::class)
-//    abstract fun bindFundSavingsAmountViewModel(viewModel: FundSavingsAmountViewModel): ViewModel
+    @Binds
+    @IntoMap
+    @ViewModelKey(UserFullDetailsViewModel::class)
+    abstract fun bindUserFullDetailsViewModelViewModel(viewModel: UserFullDetailsViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(UserListViewModel::class)
+    abstract fun bindUserListViewModel(viewModel: UserListViewModel): ViewModel
 
 
     /**
-     * Provides the MintViewModelFactory
+     * Provides the ViewModelFactory
      * */
     @Binds
     abstract fun provideViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory
