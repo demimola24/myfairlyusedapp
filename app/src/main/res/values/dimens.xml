@@ -1,0 +1,13 @@
+<resources>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="button_height">55dp</dimen>
+    <dimen name="ten_sp">10sp</dimen>
+    <dimen name="sixteen_sp">16sp</dimen>
+    <dimen name="dp_24">24dp</dimen>
+    <dimen name="dp_32">32dp</dimen>
+    <dimen name="dp_16">16dp</dimen>
+    <dimen name="dp_8">8dp</dimen>
+    <dimen name="dp_4">4dp</dimen>
+    <dimen name="dialog_button_height">60dp</dimen>
+    <dimen name="bottom_bar_height">50dp</dimen>
+</resources>

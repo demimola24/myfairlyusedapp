@@ -1,113 +1,8 @@
 package com.test.fairlyused.di
 
-import com.mintfintech.app.di.scope.FeatureScope
-import com.mintfintech.app.ui.auth.alternateregistration.updatephone.UpdateBVNPhoneFragment
-import com.mintfintech.app.ui.auth.alternateregistration.verifyaccount.AlternateVerificationFragment
-import com.mintfintech.app.ui.auth.login.LoginFragment
-import com.mintfintech.app.ui.auth.profile.createpassword.CreatePasswordFragment
-import com.mintfintech.app.ui.settings.profile.identitycard.uploadidentity.IdentityInformationFragment
-import com.mintfintech.app.ui.auth.profile.personal.PersonalInformationFragment
-import com.mintfintech.app.ui.auth.profile.physical.PhysicalVerificationFragment
-import com.mintfintech.app.ui.auth.profile.termscondition.TermsAndConditionFragment
-import com.mintfintech.app.ui.auth.profile.welcome.WelcomeUserFragment
-import com.mintfintech.app.ui.auth.recovery.deviceregistration.accountinfo.DeviceRegistrationFragment
-import com.mintfintech.app.ui.auth.recovery.deviceregistration.confirmdevicechange.ConfirmDeviceChangeFragment
-import com.mintfintech.app.ui.auth.recovery.resetpassword.stageone.BasicDetailsFragment
-import com.mintfintech.app.ui.auth.recovery.resetpassword.stagefour.ResetPasswordFragment
-import com.mintfintech.app.ui.auth.recovery.resetpassword.stagethree.ConfirmSecurityQuestionFragment
-import com.mintfintech.app.ui.auth.recovery.resetpassword.stagetwo.VerifyCodeSentFragment
-import com.mintfintech.app.ui.auth.recovery.resetsecuritydetails.helperpage.SecurityHelpFragment
-import com.mintfintech.app.ui.auth.recovery.resetsecuritydetails.stageone.ResetCodeFragment
-import com.mintfintech.app.ui.auth.recovery.resetsecuritydetails.stagethree.ResetSecurityPasswordFragment
-import com.mintfintech.app.ui.auth.recovery.resetsecuritydetails.stagetwo.ResetSecurityPinFragment
-import com.mintfintech.app.ui.auth.register.bvn.RegisterFragmentBvn
-import com.mintfintech.app.ui.auth.register.phonenumber.RegisterFragmentPhoneNumber
-import com.mintfintech.app.ui.auth.startusingmint.StartUsingMintFragment
-import com.mintfintech.app.ui.auth.userverification.AccountVerificationFragment
-import com.mintfintech.app.ui.bills.BillsParentFragment
-import com.mintfintech.app.ui.bills.payment.BillsPaymentFragment
-import com.mintfintech.app.ui.bills.billitems.BillItemFragment
-import com.mintfintech.app.ui.bills.billschedule.BillScheduleFragment
-import com.mintfintech.app.ui.bills.billscheduledetail.BillScheduleDetailFragment
-import com.mintfintech.app.ui.bills.billsmanager.BillsManagerFragment
-import com.mintfintech.app.ui.bills.category.BillCategoryFragment
-import com.mintfintech.app.ui.bills.merchant.BillMerchantFragment
-import com.mintfintech.app.ui.bills.topup.TopUpFragment
-import com.mintfintech.app.ui.bills.topup.airtime.AirtimeMerchantFragment
-import com.mintfintech.app.ui.bills.topup.data.DataMerchantFragment
-import com.mintfintech.app.ui.cards.CardsFragment
-import com.mintfintech.app.ui.finance.FinanceFragment
-import com.mintfintech.app.ui.finance.moneymanager.MoneyManagerFragment
-import com.mintfintech.app.ui.finance.transactions.TransactionFragment
-import com.mintfintech.app.ui.fund.account.FundTypeFragment
-import com.mintfintech.app.ui.fund.amount.FlutterWaveFundAccountFragment
-import com.mintfintech.app.ui.fund.amount.PaystackFundAccountFragment
-import com.mintfintech.app.ui.fund.amount.UssdFundAccountFragment
-import com.mintfintech.app.ui.savings.emergencysavings.creategoal.CreateEmergencySavingFragment
-import com.mintfintech.app.ui.savings.emergencysavings.creategoal.EmergencySavingSummaryFragment
-import com.mintfintech.app.ui.savings.emergencysavings.viewgoal.EmergencySavingDetailFragment
-import com.mintfintech.app.ui.savings.savingshistory.SavingsHistoryFragment
-import com.mintfintech.app.ui.savings.savingshistory.earnings.GoalEarningsFragment
-import com.mintfintech.app.ui.savings.savingshistory.transactions.GoalTransactionFragment
-import com.mintfintech.app.ui.savings.landing.SavingLandingFragment
-import com.mintfintech.app.ui.savings.savinggoals.creategoal.first.CreateSavingGoalFragment
-import com.mintfintech.app.ui.savings.savinggoals.creategoal.fourth.SavingSummaryFragment
-import com.mintfintech.app.ui.savings.savinggoals.fundgoal.FundSavingGoalFragment
-import com.mintfintech.app.ui.savings.savinggoals.savingsgoaldetails.GoalDetailFragment
-import com.mintfintech.app.ui.savings.savinggoals.withdraw.FundWithdrawalFragment
-import com.mintfintech.app.ui.home.HomeFragment
-import com.mintfintech.app.ui.home.savings.MintGoalsFragment
-import com.mintfintech.app.ui.savings.savinggoals.viewsavingsgoal.SavingGoalsFragment
-import com.mintfintech.app.ui.minttrade.application.MintTradeApplicationFragment
-import com.mintfintech.app.ui.minttrade.dashboard.MintTradeDashboardFragment
-import com.mintfintech.app.ui.minttrade.join.JoinMintTradeFragment
-import com.mintfintech.app.ui.minttrade.makeorder.orderitemslist.OrderItemsListFragment
-import com.mintfintech.app.ui.minttrade.orderdetails.MintTradeOrderDetailsFragment
-import com.mintfintech.app.ui.minttrade.orderdetails.orderitems.MintTradeOrderItemsFragment
-import com.mintfintech.app.ui.minttrade.orderdetails.payment.OrderDetailsPaymentFragment
-import com.mintfintech.app.ui.minttrade.orderdetails.repaymentschedule.MintTradeRepaymentScheduleFragment
-import com.mintfintech.app.ui.minttrade.orders.MintTradeOrdersFragment
-import com.mintfintech.app.ui.minttrade.payment.MintTradePaymentOptsFragment
-import com.mintfintech.app.ui.minttrade.trackorder.MintTradeTrackOrderFragment
-import com.mintfintech.app.ui.notification.NotificationFragment
-import com.mintfintech.app.ui.onboarding.OnBoardingFragment
-import com.mintfintech.app.ui.receipt.ReceiptFragment
-import com.mintfintech.app.ui.savings.roundupsavings.createsavings.CreateRoundUpSavingsFragment
-import com.mintfintech.app.ui.savings.roundupsavings.viewsavings.ViewRoundUpSavingsFragment
-import com.mintfintech.app.ui.savings.emergencysavings.creategoal.EmergencySavingFundingFragment
-import com.mintfintech.app.ui.savings.fundsavings.FundSavingsFragment
-import com.mintfintech.app.ui.savings.fundsavings.amount.FundSavingsAmountFragment
-import com.mintfintech.app.ui.savings.savinggoals.creategoal.second.SavingGoalFundingFragment
-import com.mintfintech.app.ui.savings.savinggoals.creategoal.third.SavingGoalDurationFragment
-import com.mintfintech.app.ui.settings.SettingsFragment
-import com.mintfintech.app.ui.settings.accountmgmt.AccountManagementFragment
-import com.mintfintech.app.ui.settings.accountmgmt.limit.ChooseLimitTypeFragment
-import com.mintfintech.app.ui.settings.accountmgmt.limit.LimitFragment
-import com.mintfintech.app.ui.settings.accountmgmt.pin.create.CreateOrUpdateTransactionPinFragment
-import com.mintfintech.app.ui.settings.accountmgmt.pin.reset.ResetPinFragment
-import com.mintfintech.app.ui.settings.accountmgmt.pin.reset.ValidateSecurityQuestionFragment
-import com.mintfintech.app.ui.settings.accountmgmt.security.password.ChangePasswordFragment
-import com.mintfintech.app.ui.settings.accountmgmt.security.question.SecurityQuestionFragment
-import com.mintfintech.app.ui.settings.help.HelpFragment
-import com.mintfintech.app.ui.settings.help.faq.category.FAQCategoryFragment
-import com.mintfintech.app.ui.settings.help.faq.items.FAQItemsFragment
-import com.mintfintech.app.ui.settings.legal.LegalFragment
-import com.mintfintech.app.ui.settings.profile.editemploment.EditEmploymentFragment
-import com.mintfintech.app.ui.settings.profile.editemploment.ViewEmploymentFragment
-import com.mintfintech.app.ui.settings.profile.identitycard.editidentity.EditIdentityFragment
-import com.mintfintech.app.ui.settings.profile.editpersonal.EditPersonalFragment
-import com.mintfintech.app.ui.settings.profile.identitycard.failedverification.IdCardVerificationFailedIntroFragment
-import com.mintfintech.app.ui.settings.profile.identitycard.notuploaded.UploadIdCardIntroFragment
-import com.mintfintech.app.ui.settings.referral.ReferralFragment
-import com.mintfintech.app.ui.settings.system.SystemFragment
-import com.mintfintech.app.ui.splash.SplashFragment
-import com.mintfintech.app.ui.transfer.beneficiary.AddBeneficiaryFragment
-import com.mintfintech.app.ui.transfer.verifyaccount.chooseBank.ChooseBankFragment
-import com.mintfintech.app.ui.transfer.completetransfer.transferdetails.TransferFragment
-import com.mintfintech.app.ui.transfer.verifyaccount.receiverAccount.ReceiversAccountFragment
-import com.mintfintech.app.ui.transfer.completetransfer.verifypin.TransactionPinVerificationFragment
-import com.mintfintech.app.ui.transfer.beneficiary.BankBeneficiariesFragment
-import com.mintfintech.app.ui.transfer.beneficiary.MintBeneficiariesFragment
+import com.test.fairlyused.di.scope.AppScope
+import com.test.fairlyused.ui.userfulldetails.fragment.UserFullDetailsFragment
+import com.test.fairlyused.ui.userlist.fragment.UserListFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -116,10 +11,15 @@ import dagger.android.ContributesAndroidInjector
 abstract class FragmentBuildersModule {
 
 
-//    /**Features*/
-//    @ContributesAndroidInjector
-//    @FeatureScope
-//    internal abstract fun contributeSplashFragment(): SplashFragment
+    /**Features*/
+    @ContributesAndroidInjector
+    @AppScope
+    internal abstract fun contributeUserListFragment(): UserListFragment
+
+    /**Features*/
+    @ContributesAndroidInjector
+    @AppScope
+    internal abstract fun contributeUserFullDetailsFragment(): UserFullDetailsFragment
 
 
 }

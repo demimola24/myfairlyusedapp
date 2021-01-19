@@ -7,6 +7,7 @@ import com.test.fairlyused.ui.userfulldetails.FetchUserDetailDataSource
 import com.test.fairlyused.ui.userfulldetails.model.response.UserDetail
 import com.test.fairlyused.utils.UIEvent
 import com.test.fairlyused.utils.asLiveData
+import com.test.fairlyused.utils.toDefaultErrorMessage
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
@@ -15,8 +16,8 @@ import javax.inject.Inject
 class UserFullDetailsViewModel @Inject internal constructor(private val dataSource: FetchUserDetailDataSource) :
     ViewModel() {
 
-    private val _progressNonBlocking = MutableLiveData<UIEvent<Boolean>>()
-    val progressNonBlocking = _progressNonBlocking.asLiveData()
+    private val _progress = MutableLiveData<UIEvent<Boolean>>()
+    val progressEvent = _progress.asLiveData()
 
     private val _errorEvent = MutableLiveData<UIEvent<String>>()
     val errorEvent = _errorEvent.asLiveData()
@@ -29,7 +30,7 @@ class UserFullDetailsViewModel @Inject internal constructor(private val dataSour
     fun fetchUserFullDetails(userId : String) {
         viewModelScope.launch {
             Timber.d("Getting User Full Details..")
-            _progressNonBlocking.postValue(UIEvent(true))
+            _progress.postValue(UIEvent(true))
 
             runCatching { dataSource.fetchUserDetail(userId) }
                 .onSuccess { response ->
@@ -38,10 +39,10 @@ class UserFullDetailsViewModel @Inject internal constructor(private val dataSour
                     }
                 }
                 .onFailure { exception: Throwable ->
-                    Timber.e(exception)
-                    _errorEvent.value = UIEvent("Unable to fetch user details at the moment")
+                    exception.printStackTrace()
+                    _errorEvent.value = UIEvent(exception.toDefaultErrorMessage())
                 }.also {
-                    _progressNonBlocking.value = UIEvent(false)
+                    _progress.value = UIEvent(false)
                 }
         }
     }

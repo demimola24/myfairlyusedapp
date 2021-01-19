@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">FairlyUsed</string>
+    <string name="app_name">Fairly Used App</string>
+    <string name="cancel">Cancel</string>
 </resources>

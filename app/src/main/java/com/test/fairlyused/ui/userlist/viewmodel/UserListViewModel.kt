@@ -7,6 +7,7 @@ import com.test.fairlyused.ui.userlist.FetchUsersDataSource
 import com.test.fairlyused.ui.userlist.model.response.UserSummary
 import com.test.fairlyused.utils.UIEvent
 import com.test.fairlyused.utils.asLiveData
+import com.test.fairlyused.utils.toDefaultErrorMessage
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
@@ -16,7 +17,7 @@ class UserListViewModel @Inject internal constructor(private val dataSource: Fet
     ViewModel() {
 
     private val _progressNonBlocking = MutableLiveData<UIEvent<Boolean>>()
-    val progressNonBlocking = _progressNonBlocking.asLiveData()
+    val progressEvent = _progressNonBlocking.asLiveData()
 
     private val _errorEvent = MutableLiveData<UIEvent<String>>()
     val errorEvent = _errorEvent.asLiveData()
@@ -36,13 +37,14 @@ class UserListViewModel @Inject internal constructor(private val dataSource: Fet
 
             runCatching { dataSource.fetchUsers() }
                 .onSuccess { response ->
-                    response.let {
+                    response.data?.let {
                         _userListEvent.postValue(UIEvent(it))
                     }
                 }
                 .onFailure { exception: Throwable ->
-                    Timber.e(exception)
-                    _errorEvent.value = UIEvent("Unable to fetch users at the moment")
+                    Timber.e("exception: ${exception.message}")
+                    exception.printStackTrace()
+                    _errorEvent.value = UIEvent(exception.toDefaultErrorMessage())
                 }.also {
                     _progressNonBlocking.value = UIEvent(false)
                 }

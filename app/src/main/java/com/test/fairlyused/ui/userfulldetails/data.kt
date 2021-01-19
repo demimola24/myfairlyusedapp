@@ -11,7 +11,7 @@ import javax.inject.Inject
  */
 
 interface FetchUserDetailService {
-    @GET("/user/{userId}")
+    @GET("user/{userId}")
     suspend fun fetchUserDetail(@Path("userId") userId: String): UserDetail
 
 }

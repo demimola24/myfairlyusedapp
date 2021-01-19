@@ -3,21 +3,30 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/splashFragment">
+    app:startDestination="@id/userListFragment">
 
     <fragment
-        android:id="@+id/homeFragment"
-        android:name="com.mintfintech.app.ui.home.HomeFragment"
+        android:id="@+id/userListFragment"
+        android:name="com.test.fairlyused.ui.userlist.fragment.UserListFragment"
         android:label=" "
-        tools:layout="@layout/fragment_home">
+        tools:layout="@layout/user_list_fragment">
+
+        <action
+            android:id="@+id/action_userListFragment_to_userFullDetailsFragment"
+            app:destination="@id/userFullDetailsFragment" />
 
     </fragment>
 
     <fragment
-        android:id="@+id/splashFragment"
-        android:name="com.mintfintech.app.ui.splash.SplashFragment"
-        android:label="fragment_splash"
-        tools:layout="@layout/fragment_splash">
+        android:id="@+id/userFullDetailsFragment"
+        android:name="com.test.fairlyused.ui.userfulldetails.fragment.UserFullDetailsFragment"
+        android:label=" "
+        tools:layout="@layout/full_user_details_fragment">
+
+        <argument
+            android:name="userId"
+            app:argType="string" />
+
     </fragment>
 
 </navigation>

@@ -38,6 +38,14 @@ android {
             signingConfig signingConfigs.debug
         }
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
 }
 
 dependencies {
@@ -108,3 +116,6 @@ dependencies {
     kapt "com.github.bumptech.glide:compiler:${versions.glide}"
 
 }
+
+
+apply plugin: 'androidx.navigation.safeargs'

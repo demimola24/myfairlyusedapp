@@ -2,6 +2,8 @@ package com.test.fairlyused
 
 import android.app.Application
 import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import androidx.lifecycle.MutableLiveData
 import com.test.fairlyused.di.AppComponent
 import com.test.fairlyused.di.AppInjector
@@ -25,10 +27,20 @@ class FairlyUsedApp : Application(), HasAndroidInjector {
     }
 
 
+
     companion object {
-        @JvmStatic
         fun coreComponent(context: Context) =
             (context.applicationContext as FairlyUsedApp).appComponent
+
+        @JvmStatic
+        fun hasNetwork(context: Context): Boolean {
+            var isConnected: Boolean = false // Initial Value
+            val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+            val activeNetwork: NetworkInfo? = connectivityManager.activeNetworkInfo
+            if (activeNetwork != null && activeNetwork.isConnected)
+                isConnected = true
+            return isConnected
+        }
     }
 
     override fun androidInjector(): AndroidInjector<Any> {

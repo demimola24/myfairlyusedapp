@@ -15,11 +15,15 @@ import com.test.fairlyused.ui.userlist.FetchUsersService
 import dagger.Lazy
 import dagger.Module
 import dagger.Provides
+import okhttp3.Cache
+import okhttp3.CacheControl
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import timber.log.Timber
+import java.io.IOException
 import java.net.HttpURLConnection
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
@@ -58,6 +62,8 @@ class AppModule(val app: FairlyUsedApp) {
     fun provideRetrofitBuilder(
         client: Lazy<OkHttpClient>, gson: Gson
     ): Retrofit {
+        val SIZE_OF_CACHE = (10 * 1024 * 1024).toLong() // 10 MB
+        val cache = Cache(provideContext().cacheDir, SIZE_OF_CACHE)
 
         val retrofitBuilder = Retrofit.Builder()
             .baseUrl(BuildConfig.BASE_URL)
@@ -73,19 +79,58 @@ class AppModule(val app: FairlyUsedApp) {
         val okhttp3clientBuilder = OkHttpClient.Builder()
             .addInterceptor {
 
-             val request = it.request().newBuilder()
-                .addHeader("Accept", "application/json")
-                .addHeader("Content-Type", "application/json")
-                .addHeader("app-id", BuildConfig.CLIENT_KEY)
-                .build()
+                val request =
+                    it.request().newBuilder()
+                        .addHeader("Accept", "application/json")
+                        .addHeader("Content-Type", "application/json")
+                        .addHeader("app-id", BuildConfig.CLIENT_KEY)
+                        .build()
 
             it.proceed(request)
-        }
+            }
+            .addNetworkInterceptor(REWRITE_RESPONSE_INTERCEPTOR)
+            .addInterceptor(REWRITE_RESPONSE_INTERCEPTOR_OFFLINE)
+            .cache(cache)
             .addInterceptor(logging)
             .readTimeout(63, TimeUnit.SECONDS)
 
         return  retrofitBuilder.client(okhttp3clientBuilder.build()).build()
 
+    }
+
+    private val REWRITE_RESPONSE_INTERCEPTOR = object : Interceptor {
+        @Throws(IOException::class)
+        override fun intercept(chain: Interceptor.Chain): okhttp3.Response {
+            val originalResponse = chain.proceed(chain.request())
+            val cacheControl = originalResponse.header("Cache-Control")
+            return if (cacheControl == null || cacheControl!!.contains("no-store") || cacheControl!!.contains(
+                    "no-cache"
+                ) || cacheControl!!.contains(
+                    "private"
+                )||
+                cacheControl!!.contains("must-revalidate") || cacheControl!!.contains("max-age=0")
+            ) {
+                originalResponse.newBuilder()
+                    .removeHeader("cache-control")
+                    .header("Cache-Control", "public, max-age=" + 5000)
+                    .build()
+            } else {
+                originalResponse
+            }
+        }
+    }
+
+    private val REWRITE_RESPONSE_INTERCEPTOR_OFFLINE = object : Interceptor{
+        @Throws(IOException::class)
+        override  fun intercept(chain: Interceptor.Chain): okhttp3.Response {
+            var request = chain.request()
+            if (!FairlyUsedApp.hasNetwork(provideContext())) {
+                request = request.newBuilder()
+                    .header("Cache-Control", "public, only-if-cached")
+                    .build()
+            }
+            return chain.proceed(request)
+        }
     }
 
     @Provides

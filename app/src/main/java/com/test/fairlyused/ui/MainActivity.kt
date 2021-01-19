@@ -32,8 +32,7 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
         setSupportActionBar(toolbar)
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.splashFragment,
-                R.id.homeFragment
+                R.id.userListFragment
             ), null
         ) {
             return@AppBarConfiguration true
