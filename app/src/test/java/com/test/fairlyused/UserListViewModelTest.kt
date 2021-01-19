@@ -43,12 +43,6 @@ class UserListViewModelTest {
     @Mock private lateinit var userListObserver: Observer<UIEvent<List<UserSummary>>>
 
 
-    @Before
-    fun setup() {
-
-    }
-
-
     @Test
     fun whenFetchUser_shouldReturnNewUIEvent() {
         testCoroutineRule.runBlockingTest {
