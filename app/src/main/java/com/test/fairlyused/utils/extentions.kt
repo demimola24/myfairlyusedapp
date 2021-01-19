@@ -42,7 +42,7 @@ fun Throwable.toDefaultErrorMessage(): String {
             return when (code()) {
                  504 -> {
                     //server error
-                    "Data doesn't exit locally, kindly turn on your network to fetch data"
+                    "Data doesn't exist locally, kindly turn on your network to fetch data"
                 }
                 in 500..511 -> {
                     //server error
