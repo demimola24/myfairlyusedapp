@@ -7,10 +7,6 @@ import javax.inject.Provider
 import javax.inject.Singleton
 
 
-/**
- * @author jerry on 29/01/2020
- * for MyMintApp
- **/
 
 @Singleton
 class ViewModelFactory @Inject
